@@ -9,13 +9,13 @@ public class Population {
      * Constructors
      */
     // Create a population
-    public Population(int populationSize, boolean initialise) {
+    public Population(int populationSize, boolean initialise, int height) {
         individuals = new Individual[populationSize];
         // Initialise population
         if (initialise) {
             // Loop and create individuals
             for (int i = 0; i < size(); i++) {
-                Individual newIndividual = new Individual();
+                Individual newIndividual = new Individual(height);
                 newIndividual.generateIndividual();
                 saveIndividual(i, newIndividual);
             }

@@ -5,12 +5,14 @@ public class Algorithm {
 	    private static final double mutationRate = 0.015;
 	    private static final int tournamentSize = 5;
 	    private static final boolean elitism = true;
+	    static int height;
 
 	    /* Public methods */
 	    
 	    // Evolve a population
-	    public static Population evolvePopulation(Population pop) {
-	        Population newPopulation = new Population(pop.size(), false);
+	    public static Population evolvePopulation(Population pop, int height) {
+	    	Algorithm.height = height;
+	        Population newPopulation = new Population(pop.size(), false, height);
 
 	        // Keep our best individual
 	        if (elitism) {
@@ -43,7 +45,7 @@ public class Algorithm {
 
 	    // Crossover individuals
 	    private static Individual crossover(Individual indiv1, Individual indiv2) {
-	        Individual newSol = new Individual();
+	        Individual newSol = new Individual(height);
 	        // Loop through genes
 	        for (int i = 0; i < indiv1.size(); i++) {
 	            // Crossover
@@ -78,7 +80,7 @@ public class Algorithm {
 	    // Select individuals for crossover
 	    private static Individual tournamentSelection(Population pop) {
 	        // Create a tournament population
-	        Population tournament = new Population(tournamentSize, false);
+	        Population tournament = new Population(tournamentSize, false, height);
 	        // For each place in the tournament get a random individual
 	        for (int i = 0; i < tournamentSize; i++) {
 	            int randomId = (int) (Math.random() * pop.size());

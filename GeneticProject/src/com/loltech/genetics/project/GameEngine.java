@@ -11,16 +11,16 @@ public class GameEngine implements Engine {
 	String name;
 	Environment environment;
 	Graphics2D g;
-	int UPDATES_PER_SEC = 1000000;
+	int UPDATES_PER_SEC = 100000;
 	Population myPop;
 	
 	GameEngine (int width, int height, String name) {
-		int solutionX = (int)(500 - Math.random() * 100);
-		int solutionY = (int)(500 - Math.random() * 100);
+		int solutionX = (int)(height - Math.random() * 100);
+		int solutionY = (int)(height - Math.random() * 100);
 		System.out.println(solutionX + ", " + solutionY);
-		FitnessCalc.setSolution(450,450);
-		myPop = new Population(10000, true);
-		setUpEnvironment(width, height, name, 450, 450);
+		FitnessCalc.setSolution(solutionX, solutionY);
+		myPop = new Population(500, true, height);
+		setUpEnvironment(width, height, name, solutionX, solutionY);
         startGame();
 	}
 	
@@ -68,13 +68,13 @@ public class GameEngine implements Engine {
 				i++;
 			}
 			System.out.println("generation: " + generationCount + ", " + myPop.getFittest().character.x + ", " + myPop.getFittest().character.y);
-            /*System.out.print("genes:");
+            System.out.print("genes:");
 			for (int x = 0; x < myPop.getFittest().size(); x++) {
 	            // Crossover
 				System.out.print(myPop.getFittest().genes[x]);
 	        }
-			System.out.print("\n");*/
-			myPop = Algorithm.evolvePopulation(myPop);
+			System.out.print("\n");
+			myPop = Algorithm.evolvePopulation(myPop, height);
 			environment.reset(myPop);
 		}
 		System.out.print("finished with:");

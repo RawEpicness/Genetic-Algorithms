@@ -3,13 +3,21 @@ package com.loltech.genetics.project;
 import com.advprogramming.engine.GameObject;
 
 public class Individual {
-	static int defaultGeneLength = 1500;
-    public int[] genes = new int[defaultGeneLength];
+	static int height;
+	static int defaultGeneLength;
+    public int[] genes;
     public GameObject character = new GameObject(0,0,1,1);
     // Cache
     private int fitness = 0;
 
     // Create a random individual
+    
+    public Individual(int height) {
+    	Individual.defaultGeneLength = height * 2;
+    	Individual.height = height;
+    	genes = new int[defaultGeneLength];
+    }
+    
     public void generateIndividual() {
         for (int i = 0; i < size(); i++) {
         	double rand = Math.random();

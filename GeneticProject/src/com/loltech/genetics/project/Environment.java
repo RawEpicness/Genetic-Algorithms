@@ -53,7 +53,7 @@ public class Environment {
 	}
 	
 	public void render(Graphics2D g, int index) {
-		g.clearRect(0,0, 500, 500);
+		g.clearRect(0,0, c.getWidth(), c.getHeight());
 		g.setColor(Color.RED);
 		g.fillOval(x - 150, y - 150, 1000, 1000);
 		g.setColor(Color.BLACK);
